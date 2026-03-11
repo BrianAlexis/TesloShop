@@ -8,7 +8,8 @@ import GenderPage from "./shop/pages/gender/GenderPage";
 import LoginPage from "./auth/pages/login/LoginPage";
 import Register from "./auth/pages/register/Register";
 import DashboardPage from "./admin/pages/dashboard/DashboardPage";
-import AdminProductPage from "./admin/pages/product/AdminProductPage";
+import { AdminProductsPage } from "./admin/pages/products/AdminProductsPage";
+import { AdminProductPage } from "./admin/pages/product/AdminProductPage";
 
 
 const AuthLayout = lazy(() => import("./auth/layouts/AuthLayout"))
@@ -66,7 +67,7 @@ export const appRouter = createBrowserRouter([
             },
             {
                 path: "products",
-                element: <AdminProductPage />
+                element: <AdminProductsPage />
             },
             {
                 path: "products/:id",
