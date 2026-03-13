@@ -120,7 +120,7 @@ const CustomHeader = () => {
                             variant="destructive"
                             size="sm"
                             className="ml-2">
-                            Login
+                            Admin
                         </Button>
                     </Link>
 
