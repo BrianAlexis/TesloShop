@@ -11,7 +11,7 @@ import { useAuthStore } from "@/auth/store/auth.store";
 const CustomHeader = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
-    const { user, logout } = useAuthStore()
+    const { authStatus, logout, isAdmin } = useAuthStore()
 
     const { gender } = useParams()
 
@@ -102,42 +102,37 @@ const CustomHeader = () => {
                         <Search className="h-5 w-5" />
                     </Button>
 
-                    {/* <Button variant="ghost" size="icon" className="relative">
-                        <ShoppingBag className="h-5 w-5" />
-                        {cartCount > 0 && <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
-                            {cartCount}
-                        </span>}
-                    </Button> */}
-
-                    {
-                        !user ? (
-                            <Link to="/auth/login/">
-                                <Button
-                                    variant="default"
-                                    size="sm"
-                                    className="ml-2">
-                                    Login
-                                </Button>
-                            </Link>
-                        ) : (
+                    {authStatus === "not-authenticated" ? (
+                        <Link to="/auth/login/">
                             <Button
-                                onClick={logout}
                                 variant="default"
                                 size="sm"
                                 className="ml-2">
-                                Logout
+                                Login
                             </Button>
-                        )
-                    }
-
-                    <Link to="/admin">
+                        </Link>
+                    ) : (
                         <Button
-                            variant="destructive"
+                            onClick={logout}
+                            variant="default"
                             size="sm"
                             className="ml-2">
-                            Admin
+                            Logout
                         </Button>
-                    </Link>
+                    )}
+
+                    {
+                        isAdmin() && (
+                            <Link to="/admin">
+                                <Button
+                                    variant="destructive"
+                                    size="sm"
+                                    className="ml-2">
+                                    Admin
+                                </Button>
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </div>
