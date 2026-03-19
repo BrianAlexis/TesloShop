@@ -6,10 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import CustomLogo from "@/components/custom/CustomLogo";
+import { useAuthStore } from "@/auth/store/auth.store";
 
 const CustomHeader = () => {
 
     const [searchParams, setSearchParams] = useSearchParams();
+    const { user, logout } = useAuthStore()
+
     const { gender } = useParams()
 
     const inputRef = useRef<HTMLInputElement>(null)
@@ -106,14 +109,26 @@ const CustomHeader = () => {
                         </span>}
                     </Button> */}
 
-                    <Link to="/auth/login/">
-                        <Button
-                            variant="default"
-                            size="sm"
-                            className="ml-2">
-                            Login
-                        </Button>
-                    </Link>
+                    {
+                        !user ? (
+                            <Link to="/auth/login/">
+                                <Button
+                                    variant="default"
+                                    size="sm"
+                                    className="ml-2">
+                                    Login
+                                </Button>
+                            </Link>
+                        ) : (
+                            <Button
+                                onClick={logout}
+                                variant="default"
+                                size="sm"
+                                className="ml-2">
+                                Logout
+                            </Button>
+                        )
+                    }
 
                     <Link to="/admin">
                         <Button
@@ -123,7 +138,6 @@ const CustomHeader = () => {
                             Admin
                         </Button>
                     </Link>
-
                 </div>
             </div>
         </div>
