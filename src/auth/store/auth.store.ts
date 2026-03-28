@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { User } from '@/interfaces/use.interface'
 import { create } from 'zustand'
 import { loginAction } from '../actions/login.actions'

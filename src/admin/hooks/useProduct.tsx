@@ -18,9 +18,10 @@ const useProduct = (id: string) => {
         mutationFn: createUpdateProductAction,
         onSuccess: (product: Product) => {
             queryClient.invalidateQueries({ queryKey: ['products'] })
-            queryClient.invalidateQueries({ queryKey: ['product', { id: product.id }] })
-
-            queryClient.setQueriesData(['products', { id: product.id }], product)
+            queryClient.setQueryData<Product>(
+                ['product', { id: product.id }],
+                product,
+            )
         }
     })
 
